@@ -1,0 +1,21 @@
+:root {
+  --vp-c-brand-1: #7c3aed;
+  --vp-c-brand-2: #8b5cf6;
+  --vp-c-brand-3: #a78bfa;
+  --vp-c-brand-soft: rgba(124, 58, 237, 0.14);
+}
+
+/* Give Mermaid diagrams some breathing room */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+}
+
+/* Slightly tighter code blocks */
+.vp-doc div[class*="language-"] {
+  margin: 12px 0;
+}

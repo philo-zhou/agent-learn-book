@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <!-- book base -->
+  <rect x="40" y="40" width="120" height="80" rx="6" fill="url(#g)"/>
+  <!-- pages hint -->
+  <line x1="100" y1="40" x2="100" y2="120" stroke="white" stroke-width="1.5" opacity="0.6"/>
+  <!-- 4 concept nodes on top -->
+  <circle cx="70"  cy="30" r="6" fill="#7c3aed"/>
+  <circle cx="100" cy="20" r="6" fill="#8b5cf6"/>
+  <circle cx="130" cy="30" r="6" fill="#a78bfa"/>
+  <!-- connecting lines -->
+  <line x1="70" y1="30" x2="100" y2="20" stroke="#a78bfa" stroke-width="1"/>
+  <line x1="100" y1="20" x2="130" y2="30" stroke="#a78bfa" stroke-width="1"/>
+  <line x1="70" y1="30" x2="130" y2="30" stroke="#a78bfa" stroke-width="1" opacity="0.4"/>
+</svg>
