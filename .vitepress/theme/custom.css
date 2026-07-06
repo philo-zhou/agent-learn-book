@@ -5,8 +5,9 @@
   --vp-c-brand-soft: rgba(124, 58, 237, 0.14);
 }
 
-/* Give Mermaid diagrams some breathing room */
+/* Mermaid container */
 .mermaid {
+  position: relative;
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
@@ -15,7 +16,174 @@
   border-radius: 8px;
 }
 
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Slightly tighter code blocks */
 .vp-doc div[class*="language-"] {
   margin: 12px 0;
+}
+
+/* ---------- Zoom trigger button on each diagram ---------- */
+.mermaid-zoom-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease-out, color 0.15s, border-color 0.15s;
+  z-index: 2;
+  font-family: inherit;
+}
+
+.mermaid-zoom-btn-label {
+  font-weight: 500;
+}
+
+.mermaid:hover .mermaid-zoom-btn,
+.mermaid:focus-within .mermaid-zoom-btn,
+.mermaid-zoom-btn:focus-visible {
+  opacity: 1;
+}
+
+.mermaid-zoom-btn:hover {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+
+@media (max-width: 640px) {
+  .mermaid-zoom-btn {
+    opacity: 1;
+  }
+  .mermaid-zoom-btn-label {
+    display: none;
+  }
+}
+
+/* ---------- Full-screen viewer ---------- */
+body.mermaid-viewer-open {
+  overflow: hidden;
+}
+
+.mermaid-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 12, 24, 0.92);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  display: block;
+  animation: mermaid-viewer-in 0.15s ease-out;
+}
+
+@keyframes mermaid-viewer-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.mermaid-viewer-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.mermaid-viewer-canvas.is-dragging {
+  cursor: grabbing;
+}
+
+.mermaid-viewer-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.mermaid-viewer-stage > svg {
+  display: block;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.mermaid-viewer-toolbar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.mermaid-viewer-toolbar button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-family: inherit;
+  color: #f4f2ff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.05s;
+}
+
+.mermaid-viewer-toolbar button:hover {
+  background: rgba(167, 139, 250, 0.28);
+  border-color: rgba(167, 139, 250, 0.6);
+}
+
+.mermaid-viewer-toolbar button:active {
+  transform: scale(0.94);
+}
+
+.mermaid-viewer-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .mermaid-viewer-toolbar {
+    top: 12px;
+    right: 12px;
+  }
+  .mermaid-viewer-toolbar button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .mermaid-viewer-hint {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
 }
