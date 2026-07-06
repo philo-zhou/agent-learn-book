@@ -133,3 +133,84 @@ export const bmadSidebar = [
     ],
   },
 ];
+
+export const deerflowSidebar = [
+  {
+    text: '简介',
+    items: [
+      { text: '总目录', link: '/deerflow-book/' },
+      { text: '00 前言', link: '/deerflow-book/00-前言' },
+    ],
+  },
+  {
+    text: '第零部分 · 前置篇',
+    collapsed: false,
+    items: [
+      { text: 'LangChain 基础 — Agent 的砖石', link: '/deerflow-book/第零部分-前置篇/LangChain基础-Agent的砖石' },
+      { text: 'LangGraph 基础 — Agent 的骨架', link: '/deerflow-book/第零部分-前置篇/LangGraph基础-Agent的骨架' },
+      { text: '函数调用管线总览', link: '/deerflow-book/第零部分-前置篇/函数调用管线总览' },
+      { text: '能力注入与运行模式', link: '/deerflow-book/第零部分-前置篇/能力注入与运行模式' },
+    ],
+  },
+  {
+    text: '第一部分 · 基础篇',
+    collapsed: false,
+    items: [
+      { text: '01 智能体编程的新范式', link: '/deerflow-book/第一部分-基础篇/01-智能体编程的新范式' },
+      { text: '02 对话循环 — Agent 的心跳', link: '/deerflow-book/第一部分-基础篇/02-对话循环-Agent的心跳' },
+      { text: '03 工具系统 — Agent 的双手', link: '/deerflow-book/第一部分-基础篇/03-工具系统-Agent的双手' },
+      { text: '04 沙箱与权限 — Agent 的护栏', link: '/deerflow-book/第一部分-基础篇/04-沙箱与权限-Agent的护栏' },
+    ],
+  },
+  {
+    text: '第二部分 · 核心系统篇',
+    collapsed: true,
+    items: [
+      { text: '05 配置系统 — Agent 的基因', link: '/deerflow-book/第二部分-核心系统篇/05-配置系统-Agent的基因' },
+      { text: '06 状态与线程 — Agent 的工作内存', link: '/deerflow-book/第二部分-核心系统篇/06-状态与线程-Agent的工作内存' },
+      { text: '07 中间件链 — Agent 的生命周期扩展点', link: '/deerflow-book/第二部分-核心系统篇/07-中间件链-Agent的生命周期扩展点' },
+      { text: '08 上下文管理 — Agent 的上下文预算', link: '/deerflow-book/第二部分-核心系统篇/08-上下文管理-Agent的上下文预算' },
+      { text: '09 记忆系统 — Agent 的长期记忆', link: '/deerflow-book/第二部分-核心系统篇/09-记忆系统-Agent的长期记忆' },
+    ],
+  },
+  {
+    text: '第三部分 · 高级模式篇',
+    collapsed: true,
+    items: [
+      { text: '10 子智能体系统 — Agent 的分身', link: '/deerflow-book/第三部分-高级模式篇/10-子智能体系统-Agent的分身' },
+      { text: '11 协调器模式与多智能体编排', link: '/deerflow-book/第三部分-高级模式篇/11-协调器模式与多智能体编排' },
+      { text: '12 技能系统与插件架构', link: '/deerflow-book/第三部分-高级模式篇/12-技能系统与插件架构' },
+      { text: '13 MCP 集成与外部协议', link: '/deerflow-book/第三部分-高级模式篇/13-MCP集成与外部协议' },
+    ],
+  },
+  {
+    text: '第四部分 · 工程实践篇',
+    collapsed: true,
+    items: [
+      { text: '14 运行时与流式架构', link: '/deerflow-book/第四部分-工程实践篇/14-运行时与流式架构' },
+      { text: '15 持久化与 Schema 迁移', link: '/deerflow-book/第四部分-工程实践篇/15-持久化与Schema迁移' },
+      { text: '16 Gateway API 与 IM 渠道', link: '/deerflow-book/第四部分-工程实践篇/16-Gateway-API与IM渠道' },
+      { text: '17 嵌入式客户端与 TUI', link: '/deerflow-book/第四部分-工程实践篇/17-嵌入式客户端与TUI' },
+      { text: '18 构建你自己的 Agent Harness', link: '/deerflow-book/第四部分-工程实践篇/18-构建你自己的Agent-Harness' },
+    ],
+  },
+  {
+    text: '第五部分 · 架构总结',
+    collapsed: true,
+    items: [
+      { text: '整体管线 — 一条消息的完整旅程', link: '/deerflow-book/第五部分-架构总结/整体管线-一条消息的完整旅程' },
+      { text: 'G1 图的装配', link: '/deerflow-book/第五部分-架构总结/G1-图的装配' },
+    ],
+  },
+  {
+    text: '附录',
+    collapsed: true,
+    items: [
+      { text: 'A 源码导航地图', link: '/deerflow-book/附录/A-源码导航地图' },
+      { text: 'B 工具完整清单', link: '/deerflow-book/附录/B-工具完整清单' },
+      { text: 'C 中间件完整清单', link: '/deerflow-book/附录/C-中间件完整清单' },
+      { text: 'D 配置项速查表', link: '/deerflow-book/附录/D-配置项速查表' },
+      { text: 'E 术语表', link: '/deerflow-book/附录/E-术语表' },
+    ],
+  },
+];

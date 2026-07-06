@@ -2,6 +2,10 @@
 
 > **一句话定义：BMAD-METHOD 是一种"方法论 harness"——它不运行 agent 循环，而是把声明式的 skill / agent / customization 层安装进宿主 agent（Claude Code / Cursor / Codex），并通过确定性解析核与四阶段工作流约束宿主 LLM 的行为。**
 
+::: tip 源码基线
+本书基于 [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) 仓库 commit [`58c1e38b`](https://github.com/bmad-code-org/BMAD-METHOD/commit/58c1e38be9900c3f07f0373fa2b921f948b91863)（2026-06-27）的源码分析编写。所有 `文件:行号` 锚点都对应该 commit；后续代码演进后，用 `git diff 58c1e38b HEAD -- <文件>` 定位变更。
+:::
+
 一份循序渐进的中文教程，基于 [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) 仓库的**真实源码**，每章带 `文件:行号` 的源码摘录与设计决策分析。
 
 ## 核心对照：运行时 harness vs 方法论 harness

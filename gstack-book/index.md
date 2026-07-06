@@ -2,6 +2,10 @@
 
 > **一句话：在 gstack 里，LLM 是怎么做决策的？**
 
+::: tip 源码基线
+本书基于 [garrytan/gstack](https://github.com/garrytan/gstack) 仓库 commit [`11de390b`](https://github.com/garrytan/gstack/commit/11de390be1be6849eb9a15f91ff4922dd16c589a)（`v1.58.5.0`，2026-06-25）的源码分析编写。所有 `文件:行号` 锚点都对应该 commit；后续代码演进后，用 `git diff 11de390b HEAD -- <文件>` 定位变更。
+:::
+
 本书只拆一件事——**agent 的决策逻辑**：LLM 拿到什么状态、按什么协议走 plan mode、遇到分歧怎么落 second opinion、修 bug 时被哪些 Iron Law 约束、发布时哪一步会被拦下。
 
 ## 本书**不**讲什么
