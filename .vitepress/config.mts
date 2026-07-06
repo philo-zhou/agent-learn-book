@@ -1,24 +1,6 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 import { gstackSidebar, bmadSidebar, deerflowSidebar } from './sidebars.mts';
-
-// Fenced-code transformer: convert ```mermaid blocks into <div class="mermaid">...</div>
-// The div is then picked up at runtime by the theme (see theme/index.ts).
-function mermaidPlugin(md: any) {
-  const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules) || ((tokens: any, idx: number, options: any, env: any, self: any) => self.renderToken(tokens, idx, options));
-  md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
-    const token = tokens[idx];
-    const info = (token.info || '').trim();
-    if (info === 'mermaid') {
-      const code = token.content || '';
-      const escaped = code
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-      return `<div class="mermaid">${escaped}</div>\n`;
-    }
-    return defaultFence(tokens, idx, options, env, self);
-  };
-}
 
 // Escape prose that Vue's template compiler would otherwise mis-parse:
 //   1. Bare pseudo-tags like `D<N>.k`, `<slug>`, `<CVE-ID>`, `<PPID>` — Vue treats them as unclosed HTML tags.
@@ -27,7 +9,6 @@ function mermaidPlugin(md: any) {
 // Both patterns appear widely in the books.
 //   - <TAG>: only escape in inline text tokens (safe — code spans render <TAG> as literal).
 //   - {{...}}: escape EVERYWHERE it can appear — text tokens, code_inline, code_block, fence.
-//     Because Vue re-parses the compiled template, `<code>{{X}}</code>` still triggers interpolation.
 // VitePress theme templates that legitimately use `{{ site.title }}` etc. live in .vue files,
 // not markdown, so they're untouched by this pass.
 function escapeVueUnfriendlyProse(md: any) {
@@ -40,14 +21,14 @@ function escapeVueUnfriendlyProse(md: any) {
   };
   md.core.ruler.after('inline', 'escape-vue-unfriendly-prose', (state: any) => {
     for (const blockToken of state.tokens) {
-      // Escape {{...}} in fenced/indented code blocks (they render as <pre><code>...</code></pre>).
       if ((blockToken.type === 'fence' || blockToken.type === 'code_block') && blockToken.content) {
+        // Do NOT touch mermaid fences — vitepress-plugin-mermaid needs raw source.
+        if (blockToken.type === 'fence' && (blockToken.info || '').trim() === 'mermaid') continue;
         blockToken.content = escapeInterp(blockToken.content);
         continue;
       }
       if (blockToken.type !== 'inline' || !blockToken.children) continue;
       for (const tok of blockToken.children) {
-        // Text tokens: escape both <TAG> and {{...}}.
         if (tok.type === 'text' && tok.content) {
           if (TAG_RE.test(tok.content)) {
             TAG_RE.lastIndex = 0;
@@ -55,7 +36,6 @@ function escapeVueUnfriendlyProse(md: any) {
           }
           tok.content = escapeInterp(tok.content);
         }
-        // Inline code (backtick-spans): only {{...}} needs escaping — <TAG> renders literally.
         if (tok.type === 'code_inline' && tok.content) {
           tok.content = escapeInterp(tok.content);
         }
@@ -64,7 +44,7 @@ function escapeVueUnfriendlyProse(md: any) {
   });
 }
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'Agent Learn Book',
   description: '一个学习 AI agent 仓库的个人笔记本 —— 源码驱动、白盒路线、可验证的 file:line 指针',
   lang: 'zh-CN',
@@ -78,7 +58,8 @@ export default defineConfig({
   markdown: {
     html: false,
     config: (md) => {
-      md.use(mermaidPlugin);
+      // vitepress-plugin-mermaid injects its own fence handler for ```mermaid.
+      // We only add the Vue-unfriendly-prose escaper on top.
       md.use(escapeVueUnfriendlyProse);
     },
   },
@@ -142,4 +123,4 @@ export default defineConfig({
       text: '在 GitHub 上编辑本页',
     },
   },
-});
+}));
